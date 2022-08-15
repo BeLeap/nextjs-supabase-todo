@@ -13,6 +13,10 @@ export default ({ session }: TodoProps) => {
   const [input, setInput] = useState<string>("");
   const [saveLoading, setSaveLoading] = useState<boolean>(false);
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  }
+
   const getTodos = async (userId: string) => {
     const { error, data } = await supabase
       .from<definitions["Todo"]>("Todo")
@@ -59,9 +63,19 @@ export default ({ session }: TodoProps) => {
 
   return (
     <>
-      <h1 className="m-8">
-        { `${user?.email} Todos` }
-      </h1>
+      <div
+        className="flex w-full m-8"
+      >
+        <h1 className="mx-4">
+          { `${user?.email} Todos` }
+        </h1>
+        <button
+          className="px-4 rounded border-2 bg-slate-300"
+          onClick={() => { handleLogout(); }}
+        >
+          Logout
+        </button>
+      </div>
       <div
         className="m-8 px-4 flex flex-col"
       >
