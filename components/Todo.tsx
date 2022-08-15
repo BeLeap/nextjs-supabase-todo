@@ -30,10 +30,15 @@ export default ({ session }: TodoProps) => {
     setSaveLoading(true);
     const { error } = await supabase
       .from<definitions["Todo"]>("Todo")
-      .upsert({
-        todo: todos,
-        owner: userId,
-      })
+      .upsert(
+        {
+          todo: todos,
+          owner: userId,
+        },
+        {
+          onConflict: 'owner',
+        },
+      )
       .match({ owner: userId });
 
     setSaveLoading(false);
@@ -64,6 +69,7 @@ export default ({ session }: TodoProps) => {
           <input
             className="my-4 px-4 rounded border-2"
             value={input}
+            placeholder="your todo here!"
             onChange={(e) => { setInput(e.target.value); }}
           />
           <button
@@ -80,11 +86,11 @@ export default ({ session }: TodoProps) => {
           todos.map((it, idx) => {
             return (
               <div
-                className="my-4 px-4 flex space-between"
+                className="my-4 flex space-between"
                 key={idx}
               >
                 <p
-                  className="mx-4 rounded border-2 w-full"
+                  className="px-4 rounded border-2 w-full"
                 >
                   {it}
                 </p>
