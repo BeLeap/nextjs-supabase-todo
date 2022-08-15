@@ -119,12 +119,6 @@ function Todo({ session }: TodoProps) {
           }) 
         }
       </div>
-      <button
-        className="px-4 bg-slate-300 rounded m-8"
-        onClick={() => { setTodos(todos.concat("Placeholder")) }}
-      >
-        Add
-      </button>
       <button 
         disabled={saveLoading}
         className="px-4 bg-slate-300 rounded m-8"
