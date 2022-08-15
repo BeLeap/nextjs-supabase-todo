@@ -3,14 +3,17 @@ import { supabase } from "../utils/supabase";
 
 export default () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (email: string) => {
+    setLoading(true);
     const { error } = await supabase.auth.signIn({ email });
     if (error !== null) {
       alert(error.message);
     } else {
       alert('Check email');
     }
+    setLoading(false);
   }
 
   return (
@@ -23,6 +26,7 @@ export default () => {
         onChange={(e) => { setEmail(e.target.value); }}
       />
       <button
+        disabled={loading}
         className="rounded-md border-2 m-8 px-4 bg-slate-300"
         onClick={() => { handleLogin(email); }}
       >
