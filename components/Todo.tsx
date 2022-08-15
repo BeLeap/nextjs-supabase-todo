@@ -7,7 +7,7 @@ interface TodoProps {
   session: Session,
 }
 
-export default ({ session }: TodoProps) => {
+function Todo({ session }: TodoProps) {
   const [user, setUser] = useState<User | null>(null);
   const [todos, setTodos] = useState<string[]>([]);
   const [input, setInput] = useState<string>("");
@@ -135,3 +135,5 @@ export default ({ session }: TodoProps) => {
     </>
   )
 }
+
+export default Todo;

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { supabase } from "../utils/supabase";
 
-export default () => {
+function Auth() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -30,8 +30,10 @@ export default () => {
         className="rounded-md border-2 m-8 px-4 bg-slate-300"
         onClick={() => { handleLogin(email); }}
       >
-        Send
+        { loading ? "Loading..." : "Send" }
       </button>
     </>
   )
 }
+
+export default Auth;

@@ -4,7 +4,7 @@ import Auth from "../components/Auth";
 import Todo from "../components/Todo";
 import { supabase } from "../utils/supabase";
 
-export default () => {
+function Home() {
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
@@ -17,7 +17,9 @@ export default () => {
 
   return (
     <>
-      { !session ? <Auth /> : <Todo /> }
+      { !session ? <Auth /> : <Todo session={session}/> }
     </>
   );
 }
+
+export default Home;
